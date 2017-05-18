@@ -6,19 +6,14 @@
 #include <vector>
 #include <utility>
 
-
 int main () {
 
-    std::vector<tensor_msg > tensors;
-
     // create a tensor of 4x4 floats
-    float *image_data = new float[4*4];
-    for (int i = 0; i < 4*4; ++i)
-      image_data[i] = (float) i;
-
-    int *label_data = new int[1];
-    label_data[0] = 42;
+    float *image_data = new float[4*4]{0.f, 1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 
+                                       8.f, 9.f, 10.f, 11.f, 12.f, 13.f, 14.f, 15.f};
+    int *label_data = new int[1]{42};
     
+    std::vector<tensor_msg > tensors;
     tensors.push_back(tensor_msg({4, 4}, image_data));
     tensors.push_back(tensor_msg({1}, label_data));
 
@@ -34,10 +29,7 @@ int main () {
     while (true) {
         zmq::message_t *msg = new zmq::message_t(sbuf.size());
         memcpy (msg->data (), sbuf.data(), sbuf.size());
-
-        // message reader
         socket.send(*msg);
-
         delete msg;
     }
     return 0;

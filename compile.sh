@@ -4,6 +4,7 @@ echo "build simple writer"
 CFLAGS=`pkg-config --cflags libzmq msgpack`
 LFLAGS=`pkg-config --libs libzmq msgpack`
 g++ write.cpp $CFLAGS $LFLAGS -o write -std=c++11
+g++ write2.cpp $CFLAGS $LFLAGS -o write2 -std=c++11
 
 # build zmq_op for tensorflow
 echo "build zmq_op for tensorflow"
